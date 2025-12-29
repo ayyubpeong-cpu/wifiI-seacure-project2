@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login - WiFiSecure</title>
+<style>
+  /* Reset dan base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3a8a, #374151);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+
+  .login-container {
+    background: rgba(31 41 55 / 0.8); /* abu gelap transparan */
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    width: 360px;
+    text-align: center;
+  }
+
+  .login-container h1 {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+
+  .login-container p {
+    font-size: 1rem;
+    margin-bottom: 35px;
+    color: #cbd5e1; /* abu terang */
+  }
+
+  label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #22c55e; /* hijau cerah */
+  }
+
+  input[type="text"] {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    transition: background-color 0.3s ease;
+    background: rgba(100 116 139 / 0.4);
+    color: #e0e7ff;
+    font-weight: 600;
+  }
+  input[type="text"]::placeholder {
+    color: #9ca3af;
+    font-weight: 500;
+  }
+  input[type="text"]:focus {
+    background: #22c55e;
+    color: #1e293b;
+    box-shadow: 0 0 10px #22c55e;
+  }
+
+  button {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #dc2626; /* merah terang */
+    border: none;
+    padding: 15px 0;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px #dc2626aa;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 8px 20px #b91c1ccc;
+  }
+
+  /* Error message */
+  #errorMsg {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #f87171; /* merah muda cerah */
+    display: none;
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>WiFiSecure Login</h1>
+    <p>Masukkan username untuk memulai belajar keamanan Wi-Fi</p>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder=" " autocomplete="off" required />
+      <button type="submit">Masuk</button>
+    </form>
+    <div id="errorMsg">Username minimal 3 karakter.</div>
+  </div>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const errorMsg = document.getElementById('errorMsg');
+
+  form.addEventListener('submit', function(event){
+    event.preventDefault();
+    const usernameInput = document.getElementById('username').value.trim();
+
+    if(usernameInput.length < 3){
+      errorMsg.style.display = 'block';
+    } else {
+      errorMsg.style.display = 'none';
+      localStorage.setItem('username', usernameInput);
+      // Redirect ke dashboard utama
+      window.location.href = 'dashboard.html';
+    }
+  });
+</script>
+</body>
+</html>

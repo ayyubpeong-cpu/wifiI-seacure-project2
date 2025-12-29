@@ -1,10 +1,161 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-    <title>WiFi Secure Project</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WiFiSecure - Belajar Keamanan Wi-Fi</title>
+<style>
+  /* Reset dan base */
+  * {
+    box-sizing: border-box;
+  }
+  body, html {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3a8a, #374151);
+    color: #e0e7ff;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  header {
+    background-color: rgba(31 41 55 / 0.85);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #22c55e; /* hijau cerah */
+    margin: 0;
+    letter-spacing: 2px;
+  }
+
+  nav a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 32px;
+    font-size: 1.05rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover {
+    color: #22c55e;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 700px;
+    background: rgba(31 41 55 / 0.8);
+    padding: 40px 50px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+  }
+
+  .hero-content h2 {
+    font-size: 3rem;
+    margin-bottom: 24px;
+    color: #22c55e;
+    font-weight: 700;
+    line-height: 1.2;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+  }
+
+  .hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    color: #cbd5e1;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  .btn-primary {
+    background-color: #dc2626;
+    color: white;
+    font-weight: 700;
+    padding: 16px 40px;
+    font-size: 1.15rem;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    box-shadow: 0 7px 25px #dc2626aa;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+  .btn-primary:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 10px 30px #b91c1ccc;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+    font-size: 0.9rem;
+    background-color: rgba(31 41 55 / 0.8);
+    color: #94a3b8;
+  }
+
+  /* Responsive */
+  @media (max-width: 720px) {
+    .hero-content {
+      padding: 30px 25px;
+    }
+    .hero-content h2 {
+      font-size: 2.4rem;
+    }
+    .btn-primary {
+      padding: 14px 30px;
+      font-size: 1rem;
+    }
+    header {
+      padding: 15px 20px;
+    }
+    nav a {
+      margin-left: 20px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
 </head>
 <body>
-    <h1>WiFi Secure Project</h1>
-    <p>GitHub Pages berhasil berjalan.</p>
+
+<header>
+  <h1>WiFiSecure</h1>
+  <nav>
+    <a href="edukasi.html">Edukasi</a>
+    <a href="simulasi.html">Simulasi</a>
+    <a href="kuis.html">Kuis</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero-content">
+    <h2>Belajar Keamanan Wi-Fi<br>Dengan Cara Modern & Interaktif</h2>
+    <p>
+      Platform edukasi dan simulasi keamanan jaringan Wi-Fi berbasis website yang aman, legal, dan mudah dipahami oleh siapa saja.
+    </p>
+    <button class="btn-primary" onclick="location.href='dashboard.html'">Mulai Sekarang 🚀</button>
+  </div>
+</main>
+
+<footer>
+  Proyek Akhir Mahasiswa © 2025 — WiFiSecure
+</footer>
+
 </body>
 </html>

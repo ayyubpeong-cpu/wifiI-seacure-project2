@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard WiFiSecure – AI Edition</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      margin-right: 20px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+    }
+
+    #userDisplay {
+      font-weight: 600;
+      margin-right: 15px;
+    }
+
+    #logoutBtn {
+      background: #ef4444;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    #logoutBtn:hover {
+      background: #dc2626;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px 20px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      color: #ddd;
+    }
+
+    .card button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .level1 button {
+      background: #22c55e;
+      color: #fff;
+    }
+    .level1 button:hover {
+      background: #16a34a;
+    }
+
+    .level2 button {
+      background: #f59e0b;
+      color: #fff;
+    }
+    .level2 button:hover {
+      background: #d97706;
+    }
+
+    .level3 button {
+      background: #ef4444;
+      color: #fff;
+    }
+    .level3 button:hover {
+      background: #dc2626;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    @media(max-width: 600px){
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>metode pembelajaran</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="edukasi.html">Materi</a>
+    <a href="simulasi.html">Simulasi</a>
+    <span id="userDisplay"></span>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+</header>
+
+<main>
+  <div class="card level1">
+    <h3>🟢 Level 1 – Mudah</h3>
+    <p>Pengenalan dasar Wi-Fi dan keamanan jaringan. Cocok untuk pemula.</p>
+    <button onclick="location.href='level1.html'">Mulai Level</button>
+  </div>
+
+  <div class="card level2">
+    <h3>🟡 Level 2 – Sedang</h3>
+    <p>Memahami risiko Wi-Fi publik dan konfigurasi keamanan.</p>
+    <button onclick="location.href='level2.html'">Mulai Level</button>
+  </div>
+
+  <div class="card level3">
+    <h3>🔴 Level 3 – Sulit</h3>
+    <p>Analisis keamanan dan simulasi tingkat risiko jaringan.</p>
+    <button onclick="location.href='level3.html'">Mulai Level</button>
+  </div>
+</main>
+
+<footer>WiFiSecure AI Edition © 2025</footer>
+
+<script>
+  // Tampilkan username
+  const userDisplay = document.getElementById('userDisplay');
+  const username = localStorage.getItem('username');
+  if(!username){
+    alert('Silakan login dulu!');
+    location.href = 'login.html';
+  } else {
+    userDisplay.textContent = `Halo, ${username}`;
+  }
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('username');
+    location.href = 'login.html';
+  });
+</script>
+
+</body>
+</html>

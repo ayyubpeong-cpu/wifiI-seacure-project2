@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Simulasi Keamanan Wi-Fi</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #333;
+      margin: 0; padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #4c51bf;
+      color: white;
+      padding: 15px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px rgb(0 0 0 / 0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
+    }
+
+    nav a {
+      color: white;
+      margin-right: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    #userDisplay {
+      font-weight: 600;
+      margin-right: 15px;
+    }
+
+    #logoutBtn {
+      background: #ef4444;
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    #logoutBtn:hover {
+      background: #dc2626;
+    }
+
+    main {
+      flex: 1;
+      max-width: 500px;
+      background: white;
+      margin: 40px auto 60px;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.1);
+    }
+
+    label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .password-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 45px 12px 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    input[type="password"]:focus,
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 5px #667eea;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #667eea;
+      padding: 0;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-align: center;
+      user-select: none;
+      transition: background-color 0.3s;
+    }
+    .weak {
+      background: #ef4444;
+      color: white;
+    }
+    .medium {
+      background: #f59e0b;
+      color: white;
+    }
+    .strong {
+      background: #22c55e;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🔐 Simulasi Password Wi-Fi</h1>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <span id="userDisplay"></span>
+    <button id="logoutBtn">Logout</button>
+  </nav>
+</header>
+
+<main>
+  <label for="passwordInput">Masukkan password Wi-Fi untuk diuji:</label>
+  <div class="password-wrapper">
+    <input
+      type="password"
+      id="passwordInput"
+      placeholder="Masukkan password..."
+      autocomplete="off"
+    />
+    <button id="togglePassword" class="toggle-password" aria-label="Tampilkan/ sembunyikan password">👁️</button>
+  </div>
+
+  <div id="result" class="result" style="display:none;"></div>
+</main>
+
+<script>
+  // Cek login user
+  const username = localStorage.getItem('username');
+  const userDisplay = document.getElementById('userDisplay');
+  if (!username) {
+    alert('Silakan login dulu');
+    location.href = 'login.html';
+  } else {
+    userDisplay.textContent = `Halo, ${username}`;
+  }
+
+  // Logout
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    localStorage.removeItem('username');
+    location.href = 'login.html';
+  });
+
+  // Show/hide password
+  const passwordInput = document.getElementById('passwordInput');
+  const togglePasswordBtn = document.getElementById('togglePassword');
+
+  togglePasswordBtn.addEventListener('click', () => {
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      togglePasswordBtn.textContent = '🙈';
+    } else {
+      passwordInput.type = 'password';
+      togglePasswordBtn.textContent = '👁️';
+    }
+  });
+
+  // Fungsi cek kekuatan password
+  function analyzePassword(pw) {
+    let score = 0;
+    if (pw.length >= 8) score++;
+    if (/[A-Z]/.test(pw)) score++;
+    if (/[a-z]/.test(pw)) score++;
+    if (/[0-9]/.test(pw)) score++;
+    if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+    if (score <= 2) return { strength: 'Lemah', className: 'weak' };
+    else if (score === 3 || score === 4) return { strength: 'Sedang', className: 'medium' };
+    else return { strength: 'Kuat', className: 'strong' };
+  }
+
+  const result = document.getElementById('result');
+
+  passwordInput.addEventListener('input', () => {
+    const pw = passwordInput.value.trim();
+    if (pw.length === 0) {
+      result.style.display = 'none';
+      result.textContent = '';
+      result.className = 'result';
+      return;
+    }
+    const analysis = analyzePassword(pw);
+    result.style.display = 'block';
+    result.textContent = `Kekuatan password: ${analysis.strength}`;
+    result.className = 'result ' + analysis.className;
+  });
+</script>
+
+</body>
+</html>
